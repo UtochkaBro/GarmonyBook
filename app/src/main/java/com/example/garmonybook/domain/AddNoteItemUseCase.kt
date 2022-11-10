@@ -1,8 +1,8 @@
 package com.example.garmonybook.domain
 
-class AddNoteItemUseCase {
+class AddNoteItemUseCase (private val noteListRepository: NoteListRepository) {
 
     fun addNoteItem(noteItem: NoteItem){
-        // TODO: 10.11.2022 ()
+        noteListRepository.addNoteItem(noteItem)
     }
 }

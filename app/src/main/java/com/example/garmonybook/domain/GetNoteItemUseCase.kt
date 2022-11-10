@@ -1,8 +1,8 @@
 package com.example.garmonybook.domain
 
-class GetNoteItemUseCase {
+class GetNoteItemUseCase(private val noteListRepository: NoteListRepository) {
 
     fun getNoteItem(noteItemId: Int): NoteItem {
-        // TODO: 10.11.2022()
+        return noteListRepository.getNoteItem(noteItemId)
     }
 }
