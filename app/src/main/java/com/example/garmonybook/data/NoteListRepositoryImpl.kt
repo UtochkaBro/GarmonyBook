@@ -10,6 +10,13 @@ object NoteListRepositoryImpl: NoteListRepository {
 
     private var autoIncrementId = 0
 
+    init {
+        for (i in 0 until 10) {
+            val note = NoteItem("Бег", "люблю бегать по утрам и вечерам", 10, false)
+            addNoteItem(note)
+        }
+    }
+
     override fun addNoteItem(noteItem: NoteItem) {
         if (noteItem.id == NoteItem.UNDEFINED_ID) {
             noteItem.id = autoIncrementId++
