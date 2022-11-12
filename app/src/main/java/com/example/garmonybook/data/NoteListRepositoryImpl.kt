@@ -1,5 +1,7 @@
 package com.example.garmonybook.data
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.garmonybook.domain.NoteItem
 import com.example.garmonybook.domain.NoteListRepository
 import java.lang.RuntimeException
@@ -7,6 +9,7 @@ import java.lang.RuntimeException
 object NoteListRepositoryImpl: NoteListRepository {
 
     private val noteList = mutableListOf<NoteItem>();
+    private val noteListLd = MutableLiveData<List<NoteItem>>()
 
     private var autoIncrementId = 0
 
@@ -22,14 +25,17 @@ object NoteListRepositoryImpl: NoteListRepository {
             noteItem.id = autoIncrementId++
         }
         noteList.add(noteItem)
+        updateList()
     }
 
     override fun addDescriptionItem(descriptionItem: NoteItem) {
         noteList.add(descriptionItem)
+        updateList()
     }
 
     override fun deleteNoteItem(noteItem: NoteItem) {
         noteList.remove(noteItem)
+        updateList()
     }
 
     override fun editNoteItem(noteItem: NoteItem) {
@@ -44,7 +50,11 @@ object NoteListRepositoryImpl: NoteListRepository {
         } ?: throw RuntimeException("Элемент $noteItemId не найден")
     }
 
-    override fun getNoteList(): List<NoteItem> {
-        return noteList.toList()
+    override fun getNoteList(): LiveData<List<NoteItem>> {
+        return noteListLd
+    }
+
+    private fun updateList(){
+        noteListLd.value = noteList.toList()
     }
 }
