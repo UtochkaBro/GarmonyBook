@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.example.garmonybook.R
 
-class MainActivity : AppCompatActivity() {
+class StartActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
 
@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_start)
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.noteList.observe(this){
