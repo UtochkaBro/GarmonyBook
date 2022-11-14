@@ -8,5 +8,5 @@
     <string name="title_navigation_services">Сервисы</string>
     <string name="title_navigation_book">Дневник</string>
     <string name="title_navigation_message">Сообщения</string>
-    <string name="title_navigation_note">Добавить запись</string>
+    <string name="title_navigation_note">Запись</string>
 </resources>
