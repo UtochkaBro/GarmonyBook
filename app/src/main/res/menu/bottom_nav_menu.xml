@@ -22,8 +22,9 @@
         android:title="@string/title_navigation_message" />
 
     <item
-        android:id="@+id/navigation_add_notes"
+        android:id="@+id/button_navigation_add_notes"
         android:icon="@drawable/ic_nav_add_note"
+        android:contentDescription="@string/add_note_text"
         android:title="@string/title_navigation_note" />
 
 </menu>
