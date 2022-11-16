@@ -9,32 +9,26 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.garmonybook.R
 import com.example.garmonybook.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private lateinit var viewModel: MainViewModel
-
-    private var count = 0
+    private lateinit var adapter: NoteListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupRecyclerView()
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.noteList.observe(this){
-            Log.d("MainActivityTest", it.toString())
-
-            if (count == 0) {
-                count ++
-                val note = it[0]
-                viewModel.deleteNoteItem(note)
-            }
+            adapter.noteList = it
         }
 
         val navView: BottomNavigationView = binding.navView
@@ -53,5 +47,11 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController , appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    private fun setupRecyclerView(){
+        val rvNoteList = findViewById<RecyclerView>(R.id.rv_note_list)
+        adapter = NoteListAdapter()
+        rvNoteList.adapter = adapter
     }
 }

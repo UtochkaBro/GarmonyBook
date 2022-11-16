@@ -10,15 +10,23 @@ import com.example.garmonybook.domain.NoteItem
 
 class NoteListAdapter: RecyclerView.Adapter<NoteListAdapter.NoteItemViewHolder>() {
 
-    val list = listOf<NoteItem>()
+    var noteList = listOf<NoteItem>()
+    set (value) {
+        field = value
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup , viewType: Int): NoteItemViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_note_disabled, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.item_note_disabled ,
+            parent ,
+            false
+        )
         return NoteItemViewHolder(view)
     }
 
     override fun onBindViewHolder(viewHolder: NoteItemViewHolder , position: Int) {
-        val noteItem = list[position]
+        val noteItem = noteList[position]
         viewHolder.tvName.text = noteItem.name
         viewHolder.tvDescription.text = noteItem.description
         viewHolder.tvScore.text = noteItem.score.toString()
@@ -28,10 +36,10 @@ class NoteListAdapter: RecyclerView.Adapter<NoteListAdapter.NoteItemViewHolder>(
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return noteList.size
     }
 
-    class NoteItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class NoteItemViewHolder(val view: View): RecyclerView.ViewHolder(view) {
         val tvName = view.findViewById<TextView>(R.id.tv_name)
         val tvDescription = view.findViewById<TextView>(R.id.tv_description)
         val tvScore = view.findViewById<TextView>(R.id.sb_score)
